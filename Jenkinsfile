@@ -73,7 +73,7 @@ pipeline{
 
                 script{
                     
-                    def readPomVersion = readMavenPom file: 'pom.xml'
+                    
                     nexusArtifactUploader artifacts: 
                      [
                          [
@@ -88,15 +88,15 @@ pipeline{
                         nexusVersion: 'nexus3', 
                         protocol: 'http', 
                         repository: 'demoapp-release', 
-                        version: "${readPomVersion.version}"
+                        version: "$BUILD_ID"
                 }
             }
         }
         stage('Docker Image Build'){
             steps{
-                sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
-                sh 'docker tag $JOB_NAME:v1.$BUILD_ID vijay24794/$JOB_NAME:v1.$BUILD_ID'
-                sh 'docker tag $JOB_NAME:v1.$BUILD_ID vijay24794/$JOB_NAME:latest'
+                sh 'docker image build -t demoapp:v1.$BUILD_ID .'
+                sh 'docker tag demoapp:v1.$BUILD_ID vijay24794/demoapp:v1.$BUILD_ID'
+                sh 'docker tag demoapp:v1.$BUILD_ID vijay24794/demoapp:latest'
             }
           }
        }
