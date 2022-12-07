@@ -4,17 +4,19 @@ pipeline{
     
     stages {
         
-        stage('Git Checkout'){
+        stage('Git Checkout')
+        {
             
             steps{
                 
-                script{
+                    script{
                     
-                    git branch: 'main', url: 'https://github.com/vijay24794/demo-counter-app.git'
-                }
+                            git branch: 'main', url: 'https://github.com/vijay24794/demo-counter-app.git'
+                    }
             }
         }
-        stage('UNIT testing'){
+        stage('UNIT testing')
+        {
             
             steps{
                 
@@ -24,7 +26,8 @@ pipeline{
                 }
             }
         }
-        stage('Integration testing'){
+        stage('Integration testing')
+        {
             
             steps{
                 
@@ -34,7 +37,8 @@ pipeline{
                 }
             }
         }
-        stage('Maven build'){
+        stage('Maven build')
+        {
             
             steps{
                 
@@ -44,30 +48,34 @@ pipeline{
                 }
             }
         }
-        stage('Static code analysis'){
+        stage('Static code analysis')
+        {
             
             steps{
                 
                 script{
                     
-                    withSonarQubeEnv(credentialsId: 'sonar-api') {
+                        withSonarQubeEnv(credentialsId: 'sonar-api')
+                        {
                         
                         sh 'mvn clean package sonar:sonar'
-                    }
-                   }
+                        }
                 }
             }
-            stage('Quality Gate Status'){
+        }
+        stage('Quality Gate Status')
+        {
                 
-                steps{
+            steps{
                     
-                    script{
+                script{
                         
                         waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'
-                    }
                 }
             }
-        stage('upload war file to nexus'){
+        }
+        stage('upload war file to nexus')
+        {
 
             steps{
 
@@ -92,27 +100,29 @@ pipeline{
                 }
             }
         }
-        stage('Docker Image Build'){
+        stage('Docker Image Build')
+        {
             steps{
                 sh 'docker info'
                 sh 'docker image build -t demoapp:v1.$BUILD_ID .'
                 sh 'docker tag demoapp:v1.$BUILD_ID vijay24794/demoapp:v1.$BUILD_ID'
                 sh 'docker tag demoapp:v1.$BUILD_ID vijay24794/demoapp:latest'
             }
-          }
+        }
       
-      stage('Docker Image Push to docker Hub '){
-
+      stage('Docker Image Push to docker Hub ')
+      {
             steps{
                 
-                script{
+                  script{
                     
-                            withCredentials([string(credentialsId: 'docker_password', variable: 'docker_pass')]) {
+                            withCredentials([string(credentialsId: 'docker_password', variable: 'docker_pass')]) 
+                            {
                                sh 'docker login -u vijay24794 -p ${docker_pass}'
                                sh 'docker push vijay24794/demoapp:latest'
-                             }
-                       }
-                }
-             }
+                            }
+                        }
+                   }
+       }
     }
 }
