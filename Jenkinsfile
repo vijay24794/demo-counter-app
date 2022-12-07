@@ -104,7 +104,7 @@ pipeline{
       stage('Docker Image Push to docker Hub '){
 
             steps{
-                        sh 'docker login -u vijay24794@gmail.com -p Vijay@1994'
+                        sh 'docker login -u vijay24794 -p Vijay@1994'
                         sh 'docker push vijay24794/demoapp:latest'
                       
                        }
