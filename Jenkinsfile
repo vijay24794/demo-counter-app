@@ -94,6 +94,7 @@ pipeline{
         }
         stage('Docker Image Build'){
             steps{
+                sh 'docker info'
                 sh 'docker image build -t demoapp:v1.$BUILD_ID .'
                 sh 'docker tag demoapp:v1.$BUILD_ID vijay24794/demoapp:v1.$BUILD_ID'
                 sh 'docker tag demoapp:v1.$BUILD_ID vijay24794/demoapp:latest'
