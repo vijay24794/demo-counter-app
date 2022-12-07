@@ -88,7 +88,7 @@ pipeline{
                         nexusVersion: 'nexus3', 
                         protocol: 'http', 
                         repository: 'demoapp-release', 
-                        version: "$BUILD_ID"
+                        version: "v1.$BUILD_ID"
                 }
             }
         }
