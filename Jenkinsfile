@@ -100,7 +100,7 @@ pipeline{
                 sh 'docker tag demoapp:v1.$BUILD_ID vijay24794/demoapp:latest'
             }
           }
-       }
+      
        stage('Docker Image Push to docker Hub '){
 
             steps{
