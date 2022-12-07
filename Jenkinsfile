@@ -100,6 +100,7 @@ pipeline{
                 sh 'docker tag demoapp:v1.$BUILD_ID vijay24794/demoapp:latest'
             }
           }
+        
       
        stage('Docker Image Push to docker Hub '){
 
@@ -111,8 +112,9 @@ pipeline{
 
                         sh 'docker login -u vijay24794@gmail.com -p ${docker_password}'
                         sh 'docker push vijay24794/demoapp:latest'
-            }
-        }
-     }
-  }
+                            }
+                       }
+                 }
+         }
+    }
 }
