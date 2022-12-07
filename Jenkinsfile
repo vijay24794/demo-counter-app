@@ -101,4 +101,17 @@ pipeline{
             }
           }
        }
-   }
+       stage('Docker Image Push to docker Hub '){
+
+            steps{
+
+                script{
+
+                    withCredentails([string(CredentailsId: 'docker_password')]){
+
+                        sh 'docker login -u vijay24794@gmail.com -p ${docker_password}'
+                        sh 'docker push vijay24794/demoapp:latest'
+            }
+        }
+    }
+ }
