@@ -113,5 +113,6 @@ pipeline{
                         sh 'docker push vijay24794/demoapp:latest'
             }
         }
-    }
- }
+     }
+  }
+}
