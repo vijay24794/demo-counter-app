@@ -92,6 +92,12 @@ pipeline{
                 }
             }
         }
-    }
- 
-  }
+        stage('Docker Image Build'){
+            steps{
+                sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
+                sh 'docker tag $JOB_NAME:v1.$BUILD_ID vijay24794/$JOB_NAME:v1.$BUILD_ID'
+                sh 'docker tag $JOB_NAME:v1.$BUILD_ID vijay24794/$JOB_NAME:latest'
+            }
+          }
+       }
+   }
