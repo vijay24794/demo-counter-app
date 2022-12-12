@@ -136,7 +136,7 @@ pipeline{
 
         }
       }
-      stage('Pushing the helm charts to nexus repo')
+      stage('Pushing the helm charts to nexus repo'){
       steps{
         script{
             withCredentials([string(credentialsId: 'nexus_pass', variable: 'nexus_creds')]){
@@ -149,6 +149,7 @@ pipeline{
             }
         }
       }
+     }
     }
     post {
 	        always {
